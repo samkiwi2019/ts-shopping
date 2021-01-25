@@ -7,13 +7,15 @@ import {
 } from 'react-router-dom';
 import logging from './config/logging';
 import routes from './config/routes';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const Application: React.FC<{}> = (props) => {
     useEffect(() => {
         logging.info(`Loading application`);
     }, []);
     return (
-        <div>
+        <Provider store={store}>
             <BrowserRouter>
                 <Switch>
                     {routes.map((route, index) => {
@@ -34,7 +36,7 @@ const Application: React.FC<{}> = (props) => {
                     })}
                 </Switch>
             </BrowserRouter>
-        </div>
+        </Provider>
     );
 };
 
