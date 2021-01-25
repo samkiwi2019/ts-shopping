@@ -10,6 +10,24 @@ import routes from './config/routes';
 import { Provider } from 'react-redux';
 import store from './store';
 
+const getRoutes = () =>
+    routes.map((route, index) => {
+        return (
+            <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                render={(props: RouteComponentProps<any>) => (
+                    <route.component
+                        name={route.name}
+                        {...props}
+                        {...route.props}
+                    />
+                )}
+            />
+        );
+    });
+
 const Application: React.FC<{}> = (props) => {
     useEffect(() => {
         logging.info(`Loading application`);
@@ -18,26 +36,7 @@ const Application: React.FC<{}> = (props) => {
         <Provider store={store}>
             <BrowserRouter>
                 <Suspense fallback={<div>Loading...</div>}>
-                    <Switch>
-                        {routes.map((route, index) => {
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    render={(
-                                        props: RouteComponentProps<any>
-                                    ) => (
-                                        <route.component
-                                            name={route.name}
-                                            {...props}
-                                            {...route.props}
-                                        />
-                                    )}
-                                />
-                            );
-                        })}
-                    </Switch>
+                    <Switch>{getRoutes()}</Switch>
                 </Suspense>
             </BrowserRouter>
         </Provider>
