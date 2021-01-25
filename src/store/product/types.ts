@@ -11,6 +11,13 @@ export interface ICategory {
     name: string;
 }
 
+export interface ISearch {
+    category: string;
+    page: number;
+    query: string;
+    isPromotion: boolean;
+}
+
 export interface IProductItem {
     id: number;
     productId: string;
