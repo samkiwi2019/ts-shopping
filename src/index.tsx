@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@material-ui/core';
+import './assets/css/index.css';
 
 ReactDOM.render(
     <React.StrictMode>

@@ -8,7 +8,7 @@ import { IAppActions } from '../../store/models/actions';
 import { setSearch, setProducts } from '../../store/product/actions';
 import { IProductItem } from '../../store/product/types';
 import IProps, { IDispatchProps, IStateProps } from './home.typs';
-import Button from '@material-ui/core/Button';
+import MyButton from '../../components/MyButton';
 
 const categories = [
     { key: 'All Categories', val: '' },
@@ -25,7 +25,7 @@ const categories = [
     },
 ];
 
-const HomePage: React.FC<IProps> = (props) => {
+const HomePage: React.FC<IProps> = (props): JSX.Element => {
     useEffect(() => {
         logging.info(`Loading ${props.name}`);
     }, [props.name]);
@@ -42,13 +42,9 @@ const HomePage: React.FC<IProps> = (props) => {
                 <div key={item.name}>{item.name}</div>
             ))}
 
-            <Button
-                variant='contained'
-                color='primary'
-                onClick={() => props.setSearch({ page: 1 })}
-            >
+            <MyButton color='primary' size='sm' onClick={() => console.log(1)}>
                 1
-            </Button>
+            </MyButton>
         </div>
     );
 };
