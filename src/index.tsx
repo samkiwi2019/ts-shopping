@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './config/theme';
+import { CssBaseline } from '@material-ui/core';
 
 ReactDOM.render(
     <React.StrictMode>
-        <Application />
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Application />
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

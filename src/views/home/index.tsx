@@ -8,6 +8,22 @@ import { IAppActions } from '../../store/models/actions';
 import { setSearch, setProducts } from '../../store/product/actions';
 import { IProductItem } from '../../store/product/types';
 import IProps, { IDispatchProps, IStateProps } from './home.typs';
+import Button from '@material-ui/core/Button';
+
+const categories = [
+    { key: 'All Categories', val: '' },
+    { key: 'Fresh foods', val: 'fresh-foods-and-bakery' },
+    { key: 'Pantry', val: 'pantry' },
+    { key: 'Drinks', val: 'drinks' },
+    { key: 'Beer cider and wine', val: 'beer-cider-and-wine' },
+    { key: 'Personal care', val: 'personal-care' },
+    { key: 'Baby toddler', val: 'baby-toddler-and-kids' },
+    { key: 'Pets', val: 'pets' },
+    {
+        key: 'Kitchen',
+        val: 'kitchen-dining-and-household',
+    },
+];
 
 const HomePage: React.FC<IProps> = (props) => {
     useEffect(() => {
@@ -26,10 +42,13 @@ const HomePage: React.FC<IProps> = (props) => {
                 <div key={item.name}>{item.name}</div>
             ))}
 
-            <button onClick={() => props.setSearch({ page: 1 })}>1</button>
-            <button onClick={() => props.setSearch({ page: 2 })}>2</button>
-            <button onClick={() => props.setSearch({ page: 3 })}>3</button>
-            <button onClick={() => props.setSearch({ page: 4 })}>4</button>
+            <Button
+                variant='contained'
+                color='primary'
+                onClick={() => props.setSearch({ page: 1 })}
+            >
+                1
+            </Button>
         </div>
     );
 };
