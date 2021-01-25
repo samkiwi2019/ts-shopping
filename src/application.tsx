@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
     BrowserRouter,
     Route,
@@ -17,24 +17,28 @@ const Application: React.FC<{}> = (props) => {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <Switch>
-                    {routes.map((route, index) => {
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                render={(props: RouteComponentProps<any>) => (
-                                    <route.component
-                                        name={route.name}
-                                        {...props}
-                                        {...route.props}
-                                    />
-                                )}
-                            />
-                        );
-                    })}
-                </Switch>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Switch>
+                        {routes.map((route, index) => {
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    render={(
+                                        props: RouteComponentProps<any>
+                                    ) => (
+                                        <route.component
+                                            name={route.name}
+                                            {...props}
+                                            {...route.props}
+                                        />
+                                    )}
+                                />
+                            );
+                        })}
+                    </Switch>
+                </Suspense>
             </BrowserRouter>
         </Provider>
     );

@@ -1,8 +1,8 @@
-export const SET_CATEGORY = 'SET_CATEGORY';
+export const SET_SEARCH = 'SET_SEARCH';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 
 export interface IProductState {
-    category: string;
+    search: ISearch;
     items: IProductItem[];
     pagination: IPagination;
 }
@@ -12,10 +12,10 @@ export interface ICategory {
 }
 
 export interface ISearch {
-    category: string;
-    page: number;
-    query: string;
-    isPromotion: boolean;
+    category?: string;
+    page?: number;
+    query?: string;
+    isPromotion?: boolean;
 }
 
 export interface IProductItem {
@@ -44,9 +44,9 @@ export interface IProducts {
     pagination: IPagination;
 }
 
-interface ISetCategoryAction {
-    type: typeof SET_CATEGORY;
-    payload: ICategory;
+interface ISetSearchAction {
+    type: typeof SET_SEARCH;
+    payload: ISearch;
 }
 
 interface ISetProductsAction {
@@ -54,4 +54,4 @@ interface ISetProductsAction {
     payload: IProducts;
 }
 
-export type IProductActionTypes = ISetCategoryAction | ISetProductsAction;
+export type IProductActionTypes = ISetSearchAction | ISetProductsAction;

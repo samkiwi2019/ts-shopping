@@ -1,6 +1,8 @@
+import { lazy } from 'react';
 import IRoute from '../interfaces/route';
-import AboutPage from '../views/about';
-import HomePage from '../views/home';
+
+const HomePage = lazy(() => import('../views/home'));
+const AboutPage = lazy(() => import('../views/about'));
 
 const routes: IRoute[] = [
     {

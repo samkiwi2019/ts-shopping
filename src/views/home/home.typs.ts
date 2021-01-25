@@ -1,6 +1,6 @@
 import IPage from '../../interfaces/page';
 import {
-    ICategory,
+    ISearch,
     IPagination,
     IProductActionTypes,
     IProductItem,
@@ -9,13 +9,13 @@ import {
 interface Props {}
 
 export interface IStateProps {
-    category: string;
+    search: ISearch;
     items: IProductItem[];
     pagination: IPagination;
 }
 export interface IDispatchProps {
-    setCategory: (newCategory: ICategory) => IProductActionTypes;
-    setProducts: (query: string, page: number) => void;
+    setSearch: (newSearch: ISearch) => IProductActionTypes;
+    setProducts: (search: ISearch) => void;
 }
 
 type IProps = IPage & Props & IStateProps & IDispatchProps;

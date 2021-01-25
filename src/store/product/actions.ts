@@ -1,27 +1,27 @@
 import { Dispatch } from 'react';
+import { getDataByCategory } from '../../api/product';
 import {
-    ICategory,
     IProductActionTypes,
-    SET_CATEGORY,
+    SET_SEARCH,
     SET_PRODUCTS,
+    ISearch,
 } from './types';
 
 // sync function
-export function setCategory(newCategory: ICategory): IProductActionTypes {
+export function setSearch(newSearch: ISearch): IProductActionTypes {
     return {
-        type: SET_CATEGORY,
-        payload: newCategory,
+        type: SET_SEARCH,
+        payload: newSearch,
     };
 }
 
 // async function
-export const setProducts = (query: string, page: number = 1) => {
+export const setProducts = (params: ISearch) => {
     return async (dispatch: Dispatch<IProductActionTypes>) => {
-        const res = await fetch('https://spider.keenneed.com/api/products');
-        const json = await res.json();
+        const { data } = await getDataByCategory(params);
         dispatch({
             type: SET_PRODUCTS,
-            payload: json,
+            payload: data,
         });
     };
 };

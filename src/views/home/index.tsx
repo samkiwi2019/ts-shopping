@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import logging from '../../config/logging';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { IAppState } from '../../store';
 import { IAppActions } from '../../store/models/actions';
-import { setCategory, setProducts } from '../../store/product/actions';
+import { setSearch, setProducts } from '../../store/product/actions';
 import { IProductItem } from '../../store/product/types';
 import IProps, { IDispatchProps, IStateProps } from './home.typs';
 
 const HomePage: React.FC<IProps> = (props) => {
-    const [query, setQuery] = useState<string>('');
-    const [currPage, setCurrPage] = useState<number>(1);
-
     useEffect(() => {
         logging.info(`Loading ${props.name}`);
     }, [props.name]);
 
     useEffect(() => {
-        props.setProducts(query, currPage);
+        props.setProducts(props.search);
 
         // eslint-disable-next-line
-    }, [query, currPage]);
+    }, [props.search]);
 
     return (
         <div>
@@ -29,14 +26,16 @@ const HomePage: React.FC<IProps> = (props) => {
                 <div key={item.name}>{item.name}</div>
             ))}
 
-            <div>{query}</div>
-            <button onClick={() => setQuery(query + '1')}>2</button>
+            <button onClick={() => props.setSearch({ page: 1 })}>1</button>
+            <button onClick={() => props.setSearch({ page: 2 })}>2</button>
+            <button onClick={() => props.setSearch({ page: 3 })}>3</button>
+            <button onClick={() => props.setSearch({ page: 4 })}>4</button>
         </div>
     );
 };
 
 const mapStateToProps = (state: IAppState): IStateProps => ({
-    category: state.product.category,
+    search: state.product.search,
     items: state.product.items,
     pagination: state.product.pagination,
 });
@@ -45,7 +44,7 @@ const mapDispatchToProps = (
     dispatch: ThunkDispatch<IAppState, {}, IAppActions>
 ): IDispatchProps => {
     return {
-        setCategory: bindActionCreators(setCategory, dispatch),
+        setSearch: bindActionCreators(setSearch, dispatch),
         setProducts: bindActionCreators(setProducts, dispatch),
     };
 };

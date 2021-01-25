@@ -1,12 +1,17 @@
 import {
     IProductActionTypes,
     IProductState,
-    SET_CATEGORY,
+    SET_SEARCH,
     SET_PRODUCTS,
 } from './types';
 
 const initialState: IProductState = {
-    category: 'all product',
+    search: {
+        category: '',
+        page: 1,
+        query: '',
+        isPromotion: false,
+    },
     items: [],
     pagination: {
         page: 1,
@@ -20,10 +25,10 @@ export function productReducer(
     action: IProductActionTypes
 ): IProductState {
     switch (action.type) {
-        case SET_CATEGORY:
+        case SET_SEARCH:
             return {
                 ...state,
-                category: action.payload.name,
+                search: Object.assign({}, state.search, action.payload),
             };
         case SET_PRODUCTS:
             return {
