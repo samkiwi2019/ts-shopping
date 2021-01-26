@@ -1,5 +1,5 @@
 import { Theme } from '@material-ui/core';
-import { drawerWidth, transition, container } from '../styles';
+import { drawerWidth, transition, container } from '../assets/jss/styles';
 
 const appStyle = (theme: Theme) => ({
     wrapper: {

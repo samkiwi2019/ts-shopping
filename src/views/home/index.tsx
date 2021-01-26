@@ -7,7 +7,7 @@ import { IAppState } from '../../store';
 import { IAppActions } from '../../store/models/actions';
 import { setSearch, setProducts } from '../../store/product/actions';
 import { IProductItem } from '../../store/product/types';
-import IProps, { IDispatchProps, IStateProps } from './home.typs';
+import IProps, { IDispatchProps, IStateProps } from './home.types';
 import MyButton from '../../components/MyButton';
 
 const categories = [

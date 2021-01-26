@@ -1,8 +1,4 @@
-import {
-    ButtonClassKey,
-    ExtendButtonBase,
-    ExtendButtonBaseTypeMap,
-} from '@material-ui/core';
+import { ButtonClassKey, ExtendButtonBaseTypeMap } from '@material-ui/core';
 import { OverrideProps } from '@material-ui/core/OverridableComponent';
 
 type ButtonTypeMap<

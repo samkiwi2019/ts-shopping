@@ -14,9 +14,9 @@ import {
     grayColor,
     blackColor,
     hexToRgb,
-} from '../styles';
+} from '../../assets/jss/styles';
 
-const sidebarStyle = (theme: Theme) => ({
+const sidebarStyle = (theme: Theme): any => ({
     drawerPaper: {
         border: 'none',
         position: 'fixed',

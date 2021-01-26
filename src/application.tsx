@@ -9,6 +9,7 @@ import logging from './config/logging';
 import routes from './config/routes';
 import { Provider } from 'react-redux';
 import store from './store';
+import Layout from './layout';
 
 const getRoutes = () =>
     routes.map((route, index) => {
@@ -36,7 +37,9 @@ const Application: React.FC<{}> = (props) => {
         <Provider store={store}>
             <BrowserRouter>
                 <Suspense fallback={<div>Loading...</div>}>
-                    <Switch>{getRoutes()}</Switch>
+                    <Switch>
+                        <Layout name='layout'>{getRoutes()}</Layout>
+                    </Switch>
                 </Suspense>
             </BrowserRouter>
         </Provider>

@@ -9,7 +9,7 @@ import {
     whiteColor,
     blackColor,
     hexToRgb,
-} from '../styles';
+} from '../../assets/jss/styles';
 
 const buttonStyle: any = {
     button: {
