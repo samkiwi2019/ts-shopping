@@ -7,22 +7,22 @@ const AboutPage = lazy(() => import('../views/about'));
 
 const routes: IRoute[] = [
     {
-        path: '/',
-        name: 'Home page',
+        path: '/parknsave',
+        name: 'Parknsave',
         component: HomePage,
         exact: true,
         icon: Dashboard,
     },
     {
-        path: '/about/',
-        name: 'About page',
+        path: '/countdown',
+        name: 'Countdown',
         component: AboutPage,
         exact: true,
         icon: Dashboard,
     },
     {
-        path: '/about/:number',
-        name: 'About page',
+        path: '/newword',
+        name: 'New Word',
         component: AboutPage,
         exact: true,
         icon: Dashboard,

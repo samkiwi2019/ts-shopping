@@ -106,7 +106,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             <Hidden mdUp implementation='css'>
                 <Drawer
                     variant='temporary'
-                    anchor={'left'}
+                    anchor={'right'}
                     open={props.open}
                     classes={{
                         paper: classNames(classes.drawerPaper),
@@ -131,7 +131,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             </Hidden>
             <Hidden smDown implementation='css'>
                 <Drawer
-                    anchor={'right'}
+                    anchor={'left'}
                     variant='permanent'
                     open
                     classes={{

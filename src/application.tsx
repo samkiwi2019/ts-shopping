@@ -4,6 +4,7 @@ import {
     Route,
     Switch,
     RouteComponentProps,
+    Redirect,
 } from 'react-router-dom';
 import logging from './config/logging';
 import routes from './config/routes';
@@ -38,7 +39,10 @@ const Application: React.FC<{}> = (props) => {
             <BrowserRouter>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
-                        <Layout name='layout'>{getRoutes()}</Layout>
+                        <Layout name='layout'>
+                            <Redirect from='/' to='/parknsave' />
+                            {getRoutes()}
+                        </Layout>
                     </Switch>
                 </Suspense>
             </BrowserRouter>
