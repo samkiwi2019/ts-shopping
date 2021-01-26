@@ -1,3 +1,4 @@
+import { Dashboard } from '@material-ui/icons';
 import { lazy } from 'react';
 import IRoute from '../interfaces/route';
 
@@ -10,18 +11,21 @@ const routes: IRoute[] = [
         name: 'Home page',
         component: HomePage,
         exact: true,
+        icon: Dashboard,
     },
     {
         path: '/about/',
         name: 'About page',
         component: AboutPage,
         exact: true,
+        icon: Dashboard,
     },
     {
         path: '/about/:number',
         name: 'About page',
         component: AboutPage,
         exact: true,
+        icon: Dashboard,
     },
 ];
 

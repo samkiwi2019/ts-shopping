@@ -1,7 +1,7 @@
 import { Theme } from '@material-ui/core';
 import { drawerWidth, transition, container } from '../assets/jss/styles';
 
-const appStyle = (theme: Theme) => ({
+const appStyle: any = (theme: Theme) => ({
     wrapper: {
         position: 'relative',
         top: '0',

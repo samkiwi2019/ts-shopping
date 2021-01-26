@@ -16,7 +16,7 @@ import {
     hexToRgb,
 } from '../../assets/jss/styles';
 
-const sidebarStyle = (theme: Theme): any => ({
+const sidebarStyle: any = (theme: Theme): any => ({
     drawerPaper: {
         border: 'none',
         position: 'fixed',

@@ -1,11 +1,9 @@
-import { ButtonClassKey, ExtendButtonBaseTypeMap } from '@material-ui/core';
-import { OverrideProps } from '@material-ui/core/OverridableComponent';
+import { ButtonProps } from '@material-ui/core';
+import { Modify } from '../../interfaces/page';
 
-type ButtonTypeMap<
-    P = {},
-    D extends React.ElementType = 'button'
-> = ExtendButtonBaseTypeMap<{
-    props: P & {
+type IButtonProps = Modify<
+    ButtonProps,
+    {
         color?:
             | 'primary'
             | 'info'
@@ -24,16 +22,9 @@ type ButtonTypeMap<
         justIcon?: boolean;
         className?: string;
         // use this to pass the classes props from Material-UI
-        muiClasses?: object;
+        muiClasses?: any;
         children?: React.ReactNode;
-    };
-    defaultComponent: D;
-    classKey: ButtonClassKey;
-}>;
-
-type IButtonProps<
-    D extends React.ElementType = ButtonTypeMap['defaultComponent'],
-    P = {}
-> = OverrideProps<ButtonTypeMap<P, D>, D>;
+    }
+>;
 
 export default IButtonProps;

@@ -6,8 +6,6 @@ import {
     IProductItem,
 } from '../../store/product/types';
 
-interface Props {}
-
 export interface IStateProps {
     search: ISearch;
     items: IProductItem[];
@@ -18,6 +16,6 @@ export interface IDispatchProps {
     setProducts: (search: ISearch) => void;
 }
 
-type IProps = IPage & Props & IStateProps & IDispatchProps;
+type IProps = IPage & IStateProps & IDispatchProps;
 
 export default IProps;

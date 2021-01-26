@@ -1,13 +1,11 @@
 import React from 'react';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
-
 // material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
 import styles from './buttonStyle';
-import IButtonProps from './button.types';
+import IButtonProps from './buttonProps.types';
 
 const useStyles = makeStyles(styles);
 
