@@ -55,24 +55,23 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
                             button
                             className={classes.itemLink + listItemClasses}
                         >
-                            {
-                                typeof prop.icon === 'string' ? (
-                                    <Icon
-                                        className={classNames(
-                                            classes.itemIcon,
-                                            whiteFontClasses
-                                        )}
-                                    >
-                                        {prop.icon}
-                                    </Icon>
-                                ) : null
-                                // <prop.icon
-                                //     className={classNames(
-                                //         classes.itemIcon,
-                                //         whiteFontClasses
-                                //     )}
-                                // />
-                            }
+                            {typeof prop.icon === 'string' ? (
+                                <Icon
+                                    className={classNames(
+                                        classes.itemIcon,
+                                        whiteFontClasses
+                                    )}
+                                >
+                                    {prop.icon}
+                                </Icon>
+                            ) : (
+                                <prop.icon
+                                    className={classNames(
+                                        classes.itemIcon,
+                                        whiteFontClasses
+                                    )}
+                                />
+                            )}
                             <ListItemText
                                 primary={prop.name}
                                 className={classNames(
@@ -89,11 +88,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     );
     var brand = (
         <div className={classes.logo}>
-            <a
-                href='https://www.creative-tim.com?ref=mdr-sidebar'
-                className={classNames(classes.logoLink)}
-                target='_blank'
-            >
+            <a href='/' className={classNames(classes.logoLink)}>
                 <div className={classes.logoImage}>
                     <img src={logo} alt='logo' className={classes.img} />
                 </div>

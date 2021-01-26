@@ -1,4 +1,4 @@
-import { Dashboard } from '@material-ui/icons';
+import { Language, ShoppingCart, ShoppingBasket } from '@material-ui/icons';
 import { lazy } from 'react';
 import IRoute from '../interfaces/route';
 
@@ -7,25 +7,25 @@ const AboutPage = lazy(() => import('../views/about'));
 
 const routes: IRoute[] = [
     {
-        path: '/parknsave',
-        name: 'Parknsave',
+        path: '/paknsave',
+        name: "Pak'nsave",
         component: HomePage,
         exact: true,
-        icon: Dashboard,
+        icon: ShoppingBasket,
     },
     {
         path: '/countdown',
         name: 'Countdown',
         component: AboutPage,
         exact: true,
-        icon: Dashboard,
+        icon: ShoppingCart,
     },
     {
-        path: '/newword',
-        name: 'New Word',
+        path: '/newworld',
+        name: 'New World',
         component: AboutPage,
         exact: true,
-        icon: Dashboard,
+        icon: Language,
     },
 ];
 

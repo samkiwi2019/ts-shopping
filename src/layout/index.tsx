@@ -68,7 +68,7 @@ const Layout: React.FC<IPage & RouteComponentProps<any>> = (props) => {
         <div className={classes.wrapper}>
             <Sidebar
                 routes={routes}
-                logoText={'Creative Tim'}
+                logoText={'Smart Shopping'}
                 logo={logo}
                 image={image}
                 handleDrawerToggle={handleDrawerToggle}

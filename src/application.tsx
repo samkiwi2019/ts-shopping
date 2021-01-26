@@ -40,7 +40,7 @@ const Application: React.FC<{}> = (props) => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Layout name='layout'>
-                            <Redirect from='/' to='/parknsave' />
+                            <Redirect from='/' to='/paknsave' />
                             {getRoutes()}
                         </Layout>
                     </Switch>
