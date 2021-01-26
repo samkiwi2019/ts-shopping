@@ -1,8 +1,7 @@
 /*eslint-disable*/
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -88,12 +87,12 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     );
     var brand = (
         <div className={classes.logo}>
-            <a href='/' className={classNames(classes.logoLink)}>
+            <Link to='/paknsave' className={classNames(classes.logoLink)}>
                 <div className={classes.logoImage}>
                     <img src={logo} alt='logo' className={classes.img} />
                 </div>
                 {logoText}
-            </a>
+            </Link>
         </div>
     );
     return (

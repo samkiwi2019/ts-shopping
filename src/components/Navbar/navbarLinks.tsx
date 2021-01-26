@@ -23,7 +23,7 @@ import styles from './navbarLinksStyle';
 
 const useStyles = makeStyles(styles);
 
-const NavbarLinks: React.FC<any> = () => {
+const NavbarLinks: React.FC<{}> = () => {
     const classes = useStyles();
     const [openNotification, setOpenNotification] = React.useState<any>(null);
     const [openProfile, setOpenProfile] = React.useState<any>(null);
@@ -69,6 +69,7 @@ const NavbarLinks: React.FC<any> = () => {
                     <Search />
                 </Button>
             </div>
+            {/* // TODO: optimize the way of checking device width */}
             <Button
                 color={window.innerWidth > 959 ? 'transparent' : 'white'}
                 justIcon={window.innerWidth > 959}
