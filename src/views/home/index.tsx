@@ -8,7 +8,7 @@ import { IAppActions } from '../../store/models/actions';
 import { setSearch, setProducts } from '../../store/product/actions';
 import { IProductItem } from '../../store/product/types';
 import IProps, { IDispatchProps, IStateProps } from './home.types';
-import MyButton from '../../components/MyButton';
+import DataTable from '../../components/DataTable';
 
 const categories = [
     { key: 'All Categories', val: '' },
@@ -38,13 +38,7 @@ const HomePage: React.FC<IProps> = (props): JSX.Element => {
 
     return (
         <div>
-            {props.items.map((item: IProductItem) => (
-                <div key={item.name}>{item.name}</div>
-            ))}
-
-            <MyButton color='primary' size='sm' onClick={() => console.log(1)}>
-                1
-            </MyButton>
+            <DataTable></DataTable>
         </div>
     );
 };
