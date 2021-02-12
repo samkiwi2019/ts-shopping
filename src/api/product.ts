@@ -1,7 +1,7 @@
 import axios from './api.request';
 import { AxiosPromise } from 'axios';
 
-export const getDataByCategory = (params: any): AxiosPromise<any> => {
+export const getProductsByCategory = (params: any): AxiosPromise<any> => {
     return axios.request({
         url: '/api/products',
         method: 'get',

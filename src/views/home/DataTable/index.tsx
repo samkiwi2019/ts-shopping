@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -15,10 +15,17 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Image from 'material-ui-image';
 import { green, red } from '@material-ui/core/colors';
-import Icon from '@material-ui/core/Icon';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
+import { IAppState } from '../../../store';
+import { ThunkDispatch } from 'redux-thunk';
+import { IAppActions } from '../../../store/models/actions';
+import { bindActionCreators } from 'redux';
+import { setProducts, setSearch } from '../../../store/product/actions';
+import { connect } from 'react-redux';
+import IProps, { IDispatchProps, IStateProps } from '../home.types';
+
 const useRowStyles = makeStyles<any>({
     root: {
         '& > *': {
@@ -71,9 +78,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     </IconButton>
                 </TableCell>
                 <TableCell component='th' scope='row'>
-                    <Image src={row.img} style={{ width: '120px' }} />
+                    <Image src={row.img} style={{ width: '88px' }} />
                 </TableCell>
-                <TableCell align='right'>{row.name}</TableCell>
+                <TableCell align='left'>{row.name}</TableCell>
                 <TableCell align='right'>{row.prefix}</TableCell>
                 <TableCell align='right'>{row.price}</TableCell>
                 <TableCell align='right'>{row.unit}</TableCell>
@@ -106,7 +113,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             <TableRow>
                 <TableCell
                     style={{ paddingBottom: 0, paddingTop: 0 }}
-                    colSpan={6}
+                    colSpan={9}
                 >
                     <Collapse in={open} timeout='auto' unmountOnExit>
                         <Box margin={1}>
@@ -125,160 +132,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     );
 }
 
-const rows = [
-    {
-        id: 580370,
-        productId: '5001551-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'drinks',
-        name: 'L&P Soft Drink',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5001551.png',
-        prefix: '',
-        price: '1.00',
-        unit: 'ea',
-        compare: -0.6212599419265246,
-        latest: true,
-        date: '2021-02-10T00:00:38.455811',
-    },
-    {
-        id: 581485,
-        productId: '5002395-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'drinks',
-        name: 'L&P Sugar Free Soft Drink',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5002395.png',
-        prefix: '',
-        price: '1.00',
-        unit: 'ea',
-        compare: -0.6212599419265246,
-        latest: true,
-        date: '2021-02-10T00:13:33.846233',
-    },
-    {
-        id: 584335,
-        productId: '5237502-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'drinks',
-        name: 'L&P Dry Ginger Beer Soft Drink',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5237502.png',
-        prefix: '',
-        price: '1.00',
-        unit: 'ea',
-        compare: -0.6212599419265246,
-        latest: true,
-        date: '2021-02-10T00:47:37.003814',
-    },
-    {
-        id: 581276,
-        productId: '5040099-KGM-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Produce Red Truss Tomatoes',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5040099.png',
-        prefix: '',
-        price: '0.99',
-        unit: 'kg',
-        compare: -0.5278219395866456,
-        latest: true,
-        date: '2021-02-10T00:11:05.234503',
-    },
-    {
-        id: 581294,
-        productId: '5040003-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Produce Rockmelon',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5040003.png',
-        prefix: '',
-        price: '3.99',
-        unit: 'ea',
-        compare: -0.4921510394569368,
-        latest: true,
-        date: '2021-02-10T00:11:18.947888',
-    },
-    {
-        id: 582770,
-        productId: '5254007-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'personal-care',
-        name: 'U By Kotex Nude In Black Liners',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5254007.png',
-        prefix: '',
-        price: '1.49',
-        unit: 'ea',
-        compare: -0.4247104247104247,
-        latest: true,
-        date: '2021-02-10T00:28:31.273262',
-    },
-    {
-        id: 586115,
-        productId: '5040788-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Produce Romano Tomatoes',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5040788.png',
-        prefix: '',
-        price: '2.69',
-        unit: 'ea',
-        compare: -0.3710054559625877,
-        latest: true,
-        date: '2021-02-10T01:10:45.576139',
-    },
-    {
-        id: 584921,
-        productId: '5045845-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Produce Onions',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5045845.png',
-        prefix: '',
-        price: '8.99',
-        unit: 'ea',
-        compare: -0.3664552501761804,
-        latest: true,
-        date: '2021-02-10T00:55:07.28808',
-    },
-    {
-        id: 585431,
-        productId: '5046565-KGM-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Produce Garlic',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5046565.png',
-        prefix: '',
-        price: '6.99',
-        unit: 'kg',
-        compare: -0.36589053522830356,
-        latest: true,
-        date: '2021-02-10T01:01:49.954372',
-    },
-    {
-        id: 584126,
-        productId: '5215962-EA-000PNS',
-        supplier: 'ParknSave',
-        category: 'fresh-foods-and-bakery',
-        name: 'Regal Manuka Smoked Salmon',
-        img:
-            'https://a.fsimg.co.nz/product/retail/fan/image/200x200/5215962.png',
-        prefix: '',
-        price: '9.99',
-        unit: 'ea',
-        compare: -0.35863717872086076,
-        latest: true,
-        date: '2021-02-10T00:45:08.661296',
-    },
-];
+const CollapsibleTable: React.FC<IProps> = (props: IProps): JSX.Element => {
+    const { search, setProducts, items } = props;
 
-export default function CollapsibleTable() {
+    useEffect(() => {
+        setProducts(search);
+        // eslint-disable-next-line
+    }, [search]);
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label='collapsible table'>
@@ -296,11 +157,28 @@ export default function CollapsibleTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <Row key={row.name} row={row} />
+                    {items.map((row, index) => (
+                        <Row key={index} row={row} />
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
     );
-}
+};
+
+const mapStateToProps = (state: IAppState): IStateProps => ({
+    search: state.product.search,
+    items: state.product.items,
+    pagination: state.product.pagination,
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<IAppState, {}, IAppActions>
+): IDispatchProps => {
+    return {
+        setSearch: bindActionCreators(setSearch, dispatch),
+        setProducts: bindActionCreators(setProducts, dispatch),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CollapsibleTable);
