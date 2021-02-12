@@ -24,12 +24,13 @@ const categories = [
         val: 'kitchen-dining-and-household',
     },
 ];
+
 const HomePage: React.FC<IProps> = (props: IProps): JSX.Element => {
     const { name, search, setSearch } = props;
 
     useEffect(() => {
-        logging.info(`Loading ${props.name}`);
-    }, [props.name]);
+        logging.info(`Loading ${name}`);
+    }, [name]);
 
     const handleEmit = (val: string) => {
         setSearch({

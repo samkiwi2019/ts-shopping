@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export default function (props: ISelectProps) {
+const MySelect: React.FC<ISelectProps> = (props: ISelectProps): JSX.Element => {
     const classes = useStyles();
     const [value, setValue] = React.useState('');
 
@@ -41,4 +41,6 @@ export default function (props: ISelectProps) {
             </Select>
         </FormControl>
     );
-}
+};
+
+export default MySelect;
