@@ -82,7 +82,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 </TableCell>
                 <TableCell align='left'>{row.name}</TableCell>
                 <TableCell align='right'>{row.prefix}</TableCell>
-                <TableCell align='right'>{row.price}</TableCell>
+                <TableCell align='right'>NZ${row.price}</TableCell>
                 <TableCell align='right'>{row.unit}</TableCell>
                 <TableCell align='right'>
                     {new Date(row.date).toLocaleDateString()}
@@ -108,7 +108,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         )}
                     </Box>
                 </TableCell>
-                <TableCell align='right'>Actions</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell
@@ -147,13 +146,12 @@ const CollapsibleTable: React.FC<IProps> = (props: IProps): JSX.Element => {
                     <TableRow>
                         <TableCell />
                         <TableCell>Image</TableCell>
-                        <TableCell align='right'>Name</TableCell>
+                        <TableCell align='left'>Name</TableCell>
                         <TableCell align='right'>Promotion</TableCell>
                         <TableCell align='right'>Price</TableCell>
                         <TableCell align='right'>Unit</TableCell>
                         <TableCell align='right'>Time</TableCell>
                         <TableCell align='right'>Trend</TableCell>
-                        <TableCell align='right'>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
