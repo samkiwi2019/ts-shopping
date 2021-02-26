@@ -95,7 +95,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     >
                         <Typography
                             variant='caption'
-                            style={{ color: green[500] }}
+                            style={{
+                                color: row.compare > 0 ? red[500] : green[500],
+                            }}
                         >
                             {formatTrend(row.compare)}
                         </Typography>
