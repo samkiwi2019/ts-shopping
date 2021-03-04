@@ -12,9 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 // core components
 
-import styles from './sidebarStyle';
+import styles from './styles';
 import NavbarLinks from '../Navbar/navbarLinks';
-import ISidebarProps from './siderbar.types';
+import ISidebarProps from './sidebar.types';
 
 const useStyles = makeStyles(styles);
 

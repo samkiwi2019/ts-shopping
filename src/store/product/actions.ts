@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { getDataByCategory } from '../../api/product';
+import { getProductsByCategory } from '../../api/product';
 import {
     IProductActionTypes,
     SET_SEARCH,
@@ -18,7 +18,7 @@ export function setSearch(newSearch: ISearch): IProductActionTypes {
 // async function
 export const setProducts = (params: ISearch) => {
     return async (dispatch: Dispatch<IProductActionTypes>) => {
-        const { data } = await getDataByCategory(params);
+        const { data } = await getProductsByCategory(params);
         dispatch({
             type: SET_PRODUCTS,
             payload: data,

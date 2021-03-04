@@ -3,7 +3,7 @@ const config = {
         namespace: 'Application',
     },
     baseUrl: {
-        dev: 'https://spider.keenneed.com/',
+        dev: 'https://localhost:5001/',
         pro: 'https://spider.keenneed.com/',
     },
 };

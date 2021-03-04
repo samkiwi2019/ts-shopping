@@ -1,11 +1,14 @@
 import axios from './api.request';
 import { AxiosPromise } from 'axios';
+import { IProductItem, IPagination, ISearch } from '../store/product/types';
 
-export const getDataByCategory = (params: any): AxiosPromise<any> => {
+export const getProductsByCategory = (
+    params: ISearch
+): AxiosPromise<{ items: IProductItem[]; pagination: IPagination }> => {
     return axios.request({
-        url: '/api/products',
+        url: '/api/v1/products',
         method: 'get',
-        params: params,
+        params,
     });
 };
 
@@ -14,7 +17,7 @@ export const getDataById = (params: {
     q: string | undefined;
 }): AxiosPromise<any> => {
     return axios.request({
-        url: `/api/products/${params.productId}`,
+        url: `/api/v1/products/${params.productId}`,
         method: 'get',
         params: params,
     });
@@ -25,7 +28,7 @@ export const getProductsById = (params: {
     q: string | undefined;
 }): AxiosPromise<any> => {
     return axios.request({
-        url: `/api/products/${params.productId}/all`,
+        url: `/api/v1/products/${params.productId}/all`,
         method: 'get',
         params: params,
     });
@@ -33,7 +36,7 @@ export const getProductsById = (params: {
 
 export const getProductsByRelated = (params: any): AxiosPromise<any> => {
     return axios.request({
-        url: '/api/products/related',
+        url: '/api/v1/products/related',
         method: 'get',
         params: params,
     });
@@ -41,7 +44,7 @@ export const getProductsByRelated = (params: any): AxiosPromise<any> => {
 
 export const SetSpiderSchedule = (): AxiosPromise<any> => {
     return axios.request({
-        url: '/api/products/setSpiderSchedule',
+        url: '/api/v1/products/setSpiderSchedule',
         method: 'post',
     });
 };
