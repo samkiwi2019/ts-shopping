@@ -56,7 +56,9 @@ const MyChart: React.FC<ChartProps> = (props: ChartProps): JSX.Element => {
                     />
                 </CardHeader>
                 <CardBody>
-                    <h6 className={classes.cardTitle}>History(30 days)</h6>
+                    <h6 className={classes.cardTitle}>
+                        Trends in the last 30 days
+                    </h6>
                     <p className={classes.cardCategory}>
                         <span className={getColor(item.compare)}>
                             {item.compare > 0 ? (
@@ -74,7 +76,7 @@ const MyChart: React.FC<ChartProps> = (props: ChartProps): JSX.Element => {
                             )}
                             {formatTrend(item.compare)}
                         </span>{' '}
-                        in past 90 days.
+                        Compare the average price over the past 90 days.
                     </p>
                 </CardBody>
                 <CardFooter chart>
