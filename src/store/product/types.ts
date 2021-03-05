@@ -13,9 +13,15 @@ export interface ICategory {
 
 export interface ISearch {
     category?: string;
-    page?: number;
     query?: string;
     isPromotion?: boolean;
+    currPage: number;
+    pageSize: number;
+    sortBy?: Dictionary<number>;
+}
+
+interface Dictionary<T> {
+    [Key: string]: T;
 }
 
 export interface IProductItem {

@@ -21,12 +21,28 @@ import Button from '../MyButton';
 
 import styles from './navbarLinksStyle';
 
+import { IAppState } from '../../store';
+import { ThunkDispatch } from 'redux-thunk';
+import { IAppActions } from '../../store/models/actions';
+import { bindActionCreators } from 'redux';
+import { setProducts, setSearch } from '../../store/product/actions';
+import { connect } from 'react-redux';
+import IProps, {
+    IDispatchProps,
+    IStateProps,
+} from '../../views/Home/home.types';
+
 const useStyles = makeStyles(styles);
 
-const NavbarLinks: React.FC<{}> = () => {
+const NavbarLinks: React.FC<IProps> = (props: IProps) => {
+    const { search, setSearch } = props;
+
     const classes = useStyles();
-    const [openNotification, setOpenNotification] = React.useState<any>(null);
+
     const [openProfile, setOpenProfile] = React.useState<any>(null);
+
+    // notification starting
+    const [openNotification, setOpenNotification] = React.useState<any>(null);
     const handleClickNotification = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -39,6 +55,9 @@ const NavbarLinks: React.FC<{}> = () => {
     const handleCloseNotification = () => {
         setOpenNotification(null);
     };
+    // notification ending
+
+    // Profile starting
     const handleClickProfile = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -51,6 +70,21 @@ const NavbarLinks: React.FC<{}> = () => {
     const handleCloseProfile = () => {
         setOpenProfile(null);
     };
+    // Profile ending
+
+    // searching starting
+    let timer: any = null;
+    const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+            setSearch({
+                ...search,
+                query: event.target.value.trim(),
+            });
+        }, 250);
+    };
+    // searching ending
+
     return (
         <div>
             <div className={classes.searchWrapper}>
@@ -63,6 +97,8 @@ const NavbarLinks: React.FC<{}> = () => {
                         inputProps: {
                             'aria-label': 'Search',
                         },
+                        onChange: handleSearchInput,
+                        defaultValue: search.query,
                     }}
                 />
                 <Button color='white' aria-label='edit' justIcon round>
@@ -233,4 +269,20 @@ const NavbarLinks: React.FC<{}> = () => {
         </div>
     );
 };
-export default NavbarLinks;
+
+const mapStateToProps = (state: IAppState): IStateProps => ({
+    search: state.product.search,
+    items: state.product.items,
+    pagination: state.product.pagination,
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<IAppState, {}, IAppActions>
+): IDispatchProps => {
+    return {
+        setSearch: bindActionCreators(setSearch, dispatch),
+        setProducts: bindActionCreators(setProducts, dispatch),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarLinks);

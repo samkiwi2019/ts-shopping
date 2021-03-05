@@ -8,9 +8,11 @@ import {
 const initialState: IProductState = {
     search: {
         category: '',
-        page: 1,
+        currPage: 1,
         query: '',
         isPromotion: false,
+        pageSize: 10,
+        sortBy: { compare: 0 },
     },
     items: [],
     pagination: {

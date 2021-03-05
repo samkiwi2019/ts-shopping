@@ -3,37 +3,25 @@ import { AxiosPromise } from 'axios';
 import { IProductItem, IPagination, ISearch } from '../store/product/types';
 
 export const getProductsByCategory = (
-    params: ISearch
+    data: ISearch
 ): AxiosPromise<{ items: IProductItem[]; pagination: IPagination }> => {
     return axios.request({
         url: '/api/v1/products',
-        method: 'get',
-        params,
+        method: 'post',
+        data,
     });
 };
 
-export const getDataById = (params: {
-    productId: string;
-    q: string | undefined;
-}): AxiosPromise<any> => {
+export const getProductsById = (
+    productId: string
+): AxiosPromise<{ items: IProductItem[] }> => {
     return axios.request({
-        url: `/api/v1/products/${params.productId}`,
-        method: 'get',
-        params: params,
+        url: `/api/v1/products/${productId}/items`,
+        method: 'post',
     });
 };
 
-export const getProductsById = (params: {
-    productId: string;
-    q: string | undefined;
-}): AxiosPromise<any> => {
-    return axios.request({
-        url: `/api/v1/products/${params.productId}/all`,
-        method: 'get',
-        params: params,
-    });
-};
-
+// Not used temporarily
 export const getProductsByRelated = (params: any): AxiosPromise<any> => {
     return axios.request({
         url: '/api/v1/products/related',

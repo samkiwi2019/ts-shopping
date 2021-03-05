@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -25,6 +25,10 @@ import { bindActionCreators } from 'redux';
 import { setProducts, setSearch } from '../../../store/product/actions';
 import { connect } from 'react-redux';
 import IProps, { IDispatchProps, IStateProps } from '../home.types';
+import { LinearProgress } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
+import MyChart from './chart';
+import { IProductItem } from '../../../store/product/types';
 
 const useRowStyles = makeStyles<any>({
     root: {
@@ -34,33 +38,18 @@ const useRowStyles = makeStyles<any>({
     },
 });
 
-function createData(
-    img: string,
-    name: string,
-    prefix: string,
-    price: string,
-    unit: string,
-    date: string,
-    compare: number
-) {
-    return {
-        img,
-        name,
-        prefix,
-        price,
-        unit,
-        date,
-        compare,
-    };
-}
-
-function Row(props: { row: ReturnType<typeof createData> }) {
+function Row(props: { row: IProductItem }) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
     const formatTrend = (trend: number): string => {
         return (trend * 100).toFixed(2) + '%';
     };
+
+    useEffect(() => {
+        setOpen(false);
+    }, [row]);
+
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
@@ -78,7 +67,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     </IconButton>
                 </TableCell>
                 <TableCell component='th' scope='row'>
-                    <Image src={row.img} style={{ width: '88px' }} />
+                    <Image src={row.img} />
                 </TableCell>
                 <TableCell align='left'>{row.name}</TableCell>
                 <TableCell align='right'>{row.prefix}</TableCell>
@@ -94,7 +83,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         alignItems='center'
                     >
                         <Typography
-                            variant='caption'
+                            variant='body1'
                             style={{
                                 color: row.compare > 0 ? red[500] : green[500],
                             }}
@@ -117,15 +106,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     colSpan={9}
                 >
                     <Collapse in={open} timeout='auto' unmountOnExit>
-                        <Box margin={1}>
-                            <Typography
-                                variant='h6'
-                                gutterBottom
-                                component='div'
-                            >
-                                History
-                            </Typography>
-                        </Box>
+                        <MyChart item={row} />
                     </Collapse>
                 </TableCell>
             </TableRow>
@@ -133,36 +114,74 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     );
 }
 
+function CustomLoadingOverlay() {
+    return (
+        <div style={{ position: 'absolute', top: 0, width: '100%' }}>
+            <LinearProgress />
+        </div>
+    );
+}
+
 const CollapsibleTable: React.FC<IProps> = (props: IProps): JSX.Element => {
-    const { search, setProducts, items } = props;
+    const { search, setProducts, items, setSearch, pagination } = props;
+    const [loading, setLoading] = useState(false);
+
+    const handleSetItems = async () => {
+        setLoading(true);
+        console.log(search);
+        await setProducts(search);
+        setLoading(false);
+    };
+
+    let timer: any = null;
+    const handleChange = (event: React.ChangeEvent<unknown>, currPage: any) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+            setSearch({
+                ...search,
+                currPage,
+            });
+        }, 250);
+    };
 
     useEffect(() => {
-        setProducts(search);
+        handleSetItems();
         // eslint-disable-next-line
     }, [search]);
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label='collapsible table'>
-                <TableHead>
-                    <TableRow>
-                        <TableCell />
-                        <TableCell>Image</TableCell>
-                        <TableCell align='left'>Name</TableCell>
-                        <TableCell align='right'>Promotion</TableCell>
-                        <TableCell align='right'>Price</TableCell>
-                        <TableCell align='right'>Unit</TableCell>
-                        <TableCell align='right'>Time</TableCell>
-                        <TableCell align='right'>Trend</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {items.map((row, index) => (
-                        <Row key={index} row={row} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <>
+            <TableContainer component={Paper} style={{ position: 'relative' }}>
+                {!loading ? null : <CustomLoadingOverlay />}
+                <Table aria-label='collapsible table'>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell />
+                            <TableCell>Image</TableCell>
+                            <TableCell align='left'>Name</TableCell>
+                            <TableCell align='right'>Promotion</TableCell>
+                            <TableCell align='right'>Price</TableCell>
+                            <TableCell align='right'>Unit</TableCell>
+                            <TableCell align='right'>Time</TableCell>
+                            <TableCell align='right'>Trend</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {items.map((row, index) => (
+                            <Row key={index} row={row} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Box display='flex' justifyContent='flex-end' mt={2}>
+                <Pagination
+                    count={Math.ceil(pagination.total / search.pageSize)}
+                    variant='outlined'
+                    color='primary'
+                    onChange={handleChange}
+                />
+            </Box>
+        </>
     );
 };
 

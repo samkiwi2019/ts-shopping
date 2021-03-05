@@ -1,5 +1,5 @@
 export default interface IPage {
-    name: string;
+    name?: string;
 }
 
 export type Modify<T, R> = Omit<T, keyof R> & R;

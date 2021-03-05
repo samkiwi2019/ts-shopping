@@ -21,7 +21,7 @@ class HttpRequest {
             baseURL: this.baseUrl,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
-                Authorization: `Bearer ${localStorage.getItem('venus_at')}`, // passport
+                Authorization: `Bearer ${localStorage.getItem('venus_at')}`, // jwt access_token
             },
             withCredentials: false, // carry cookies
         };
@@ -54,12 +54,11 @@ class HttpRequest {
                 let errorInfo: any = error.response;
                 if (!errorInfo) {
                     const {
-                        request: { statusText, status },
+                        request: { status },
                         config,
                     } = JSON.parse(JSON.stringify(error));
                     errorInfo = {
                         data: '',
-                        statusText,
                         status,
                         request: { responseURL: config.url },
                     };

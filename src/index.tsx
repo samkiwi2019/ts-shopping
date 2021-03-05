@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@material-ui/core';
 import './assets/css/index.css';
+import './assets/css/material-dashboard.css';
 
 ReactDOM.render(
     // <React.StrictMode>

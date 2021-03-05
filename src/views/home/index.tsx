@@ -9,6 +9,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IAppState } from '../../store';
 import { IAppActions } from '../../store/models/actions';
 import { setProducts, setSearch } from '../../store/product/actions';
+import { Box, FormControlLabel, Switch } from '@material-ui/core';
 
 const categories = [
     { key: 'All Categories', val: '' },
@@ -39,13 +40,37 @@ const HomePage: React.FC<IProps> = (props: IProps): JSX.Element => {
         });
     };
 
+    const handleIsPromotion = (
+        event: React.ChangeEvent<HTMLInputElement>,
+        isPromotion: boolean
+    ) => {
+        setSearch({
+            ...search,
+            isPromotion,
+        });
+    };
+
     return (
         <div>
-            <MySelect
-                items={categories}
-                handleEmit={handleEmit}
-                title='Category'
-            />
+            <Box display='flex' mb={2}>
+                <MySelect
+                    items={categories}
+                    handleEmit={handleEmit}
+                    title='Category'
+                />
+                <Box pt={3} ml={2}>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={search.isPromotion}
+                                onChange={handleIsPromotion}
+                                color='primary'
+                            />
+                        }
+                        label='Only Promotion'
+                    />
+                </Box>
+            </Box>
             <DataTable name='paknsave_table'></DataTable>
         </div>
     );
