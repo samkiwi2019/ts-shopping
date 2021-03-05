@@ -17,12 +17,12 @@ export interface ISearch {
     isPromotion?: boolean;
     currPage: number;
     pageSize: number;
-    sortBy?: Dictionary<number>;
+    sortBy?: string;
 }
 
-interface Dictionary<T> {
-    [Key: string]: T;
-}
+// interface Dictionary<T> {
+//     [Key: string]: T;
+// }
 
 export interface IProductItem {
     id: number;

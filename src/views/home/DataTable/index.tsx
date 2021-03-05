@@ -167,9 +167,11 @@ const CollapsibleTable: React.FC<IProps> = (props: IProps): JSX.Element => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {items.map((row, index) => (
-                            <Row key={index} row={row} />
-                        ))}
+                        {!items
+                            ? null
+                            : items.map((row, index) => (
+                                  <Row key={index} row={row} />
+                              ))}
                     </TableBody>
                 </Table>
             </TableContainer>

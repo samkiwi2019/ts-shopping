@@ -25,12 +25,15 @@ const Layout: React.FC<IPage & RouteComponentProps<any>> = (props) => {
     const [color, setColor] = React.useState<IBgColor>('purple');
     const [fixedClasses, setFixedClasses] = React.useState('dropdown show');
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    // eslint-disable-next-line
     const handleImageClick = (image: string) => {
         setImage(image);
     };
+    // eslint-disable-next-line
     const handleColorClick = (color: IBgColor) => {
         setColor(color);
     };
+    // eslint-disable-next-line
     const handleFixedClick = () => {
         if (fixedClasses === 'dropdown') {
             setFixedClasses('dropdown show');

@@ -52,6 +52,7 @@ class HttpRequest {
             (error: AxiosError): Promise<AxiosError> => {
                 this.destroy(url);
                 let errorInfo: any = error.response;
+                console.log(`===>`, error);
                 if (!errorInfo) {
                     const {
                         request: { status },

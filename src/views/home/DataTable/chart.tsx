@@ -6,7 +6,7 @@ import CardHeader from '../../../components/Card/CardHeader';
 import AccessTime from '@material-ui/icons/AccessTime';
 import ChartistGraph from 'react-chartist';
 import styles from '../../../assets/jss/dashboardStyle';
-import { Divider, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import dataFormat from './data';
 import { IProductItem } from '../../../store/product/types';
 import dayjs from 'dayjs';
@@ -40,7 +40,8 @@ const MyChart: React.FC<ChartProps> = (props: ChartProps): JSX.Element => {
 
     useEffect(() => {
         getData();
-    }, [item]);
+        // eslint-disable-next-line
+    }, [item.productId]);
 
     return (
         <div>

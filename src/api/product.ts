@@ -3,12 +3,12 @@ import { AxiosPromise } from 'axios';
 import { IProductItem, IPagination, ISearch } from '../store/product/types';
 
 export const getProductsByCategory = (
-    data: ISearch
+    params: ISearch
 ): AxiosPromise<{ items: IProductItem[]; pagination: IPagination }> => {
     return axios.request({
         url: '/api/v1/products',
-        method: 'post',
-        data,
+        method: 'get',
+        params,
     });
 };
 
@@ -17,7 +17,7 @@ export const getProductsById = (
 ): AxiosPromise<{ items: IProductItem[] }> => {
     return axios.request({
         url: `/api/v1/products/${productId}/items`,
-        method: 'post',
+        method: 'get',
     });
 };
 

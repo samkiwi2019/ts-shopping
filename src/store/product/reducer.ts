@@ -12,7 +12,7 @@ const initialState: IProductState = {
         query: '',
         isPromotion: false,
         pageSize: 10,
-        sortBy: { compare: 0 },
+        sortBy: 'compare',
     },
     items: [],
     pagination: {
