@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo
+
+[SmartShopping](https://shop.keenneed.com)
+
+[APIs](https://spider.keenneed.com/swagger/index.html)
+
 ## Available Scripts
 
 In the project directory, you can run:
