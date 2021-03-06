@@ -37,6 +37,7 @@ const HomePage: React.FC<IProps> = (props: IProps): JSX.Element => {
         setSearch({
             ...search,
             category: val,
+            currPage: 1, // have to reset current page to page 1
         });
     };
 
