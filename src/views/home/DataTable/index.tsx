@@ -180,6 +180,7 @@ const CollapsibleTable: React.FC<IProps> = (props: IProps): JSX.Element => {
                     count={Math.ceil(pagination.total / search.pageSize)}
                     variant='outlined'
                     color='primary'
+                    page={search.currPage}
                     onChange={handleChange}
                 />
             </Box>
